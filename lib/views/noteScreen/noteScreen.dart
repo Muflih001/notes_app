@@ -30,8 +30,9 @@ class _NotescreenState extends State<Notescreen> {
               "content": _descriptionController.text
             });
             noteKeys = notebox.keys.toList();
-            setState(() {});
+
             Navigator.pop(context);
+            setState(() {});
           },
           child: Text('Save Note'),
         ),

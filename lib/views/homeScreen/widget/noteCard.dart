@@ -9,7 +9,17 @@ class Notecard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [Text(title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),Text( content,style: TextStyle(fontSize: 17),)],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            content,
+            style: TextStyle(fontSize: 17),
+          )
+        ],
       ),
     );
   }
