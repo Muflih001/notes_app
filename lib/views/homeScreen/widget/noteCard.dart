@@ -9,7 +9,11 @@ class Notecard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: Container(decoration: BoxDecoration(border: Border.all(color: Colors.black,width: 2),borderRadius: BorderRadius.circular(10)),
+      child: Container(
+        padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black, width: 2),
+            borderRadius: BorderRadius.circular(10)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
