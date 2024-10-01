@@ -11,6 +11,8 @@ class Notescreen extends StatefulWidget {
 class _NotescreenState extends State<Notescreen> {
   TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   var notebox = Hive.box("notebox");
   List noteKeys = [];
   @override
@@ -32,58 +34,66 @@ class _NotescreenState extends State<Notescreen> {
         ),
         floatingActionButton: TextButton(
           onPressed: () {
-            notebox.add({
-              "title": _titleController.text,
-              "content": _descriptionController.text
-            });
-            noteKeys = notebox.keys.toList();
-
-            Navigator.pop(context);
-            setState(() {});
+            if (_formKey.currentState!.validate()) {
+              notebox.add({
+                "title": _titleController.text,
+                "content": _descriptionController.text
+              });
+              noteKeys = notebox.keys.toList();
+              setState(() {
+                
+              });
+              Navigator.pop(context);
+              setState(() {});
+              
+            }
           },
           child: Text('Save Note'),
         ),
         body: SafeArea(
           child: Container(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
-                    }
-                    return null;
-                  },
-                  controller: _titleController,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  maxLines: null,
-                  decoration: InputDecoration(
-                      labelText: 'Content',
-                      border: OutlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some content';
-                    }
-                    return null;
-                  },
-                  controller: _descriptionController,
-                )
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                        labelText: 'Title',
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a title';
+                      }
+                      return null;
+                    },
+                    controller: _titleController,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        labelText: 'Content',
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some content';
+                      }
+                      return null;
+                    },
+                    controller: _descriptionController,
+                  )
+                ],
+              ),
             ),
           ),
         ));
