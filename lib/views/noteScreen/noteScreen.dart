@@ -23,6 +23,13 @@ class _NotescreenState extends State<Notescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Create Notes',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ),
         floatingActionButton: TextButton(
           onPressed: () {
             notebox.add({
