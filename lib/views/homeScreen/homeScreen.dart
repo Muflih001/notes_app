@@ -43,7 +43,7 @@ class _HomescreenState extends State<Homescreen> {
             return Notecard(title: note["title"], content: note["content"]);
           },
           separatorBuilder: (context, index) => SizedBox(
-                height: 10,
+                height: 0,
               ),
           itemCount: noteKeys.length),
     );
